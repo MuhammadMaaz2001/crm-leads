@@ -1,0 +1,78 @@
+{
+  "name": "zero-cost-crm",
+  "private": true,
+  "version": "1.1.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -n web,api -c cyan,magenta \"vite\" \"tsx watch server/index.ts\"",
+    "dev:web": "vite",
+    "dev:api": "tsx watch server/index.ts",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "preview": "vite preview",
+    "test": "vitest run --config vitest.config.ts",
+    "test:api": "vitest run --config vitest.functional.config.ts",
+    "test:api:prep": "node testing/functional/prepare.mjs",
+    "test:e2e": "playwright test",
+    "test:e2e:install": "playwright install chromium",
+    "ci": "npm run lint && npm run format:check && npm run test && npm run build",
+    "db:migrate": "node scripts/db-migrate.mjs",
+    "stage:backfill": "tsx scripts/stage-auto-move-backfill.ts",
+    "start": "NODE_ENV=production tsx server/index.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1156.0",
+    "@aws-sdk/s3-request-presigner": "^3.1157.0",
+    "@dnd-kit/core": "^6.3.1",
+    "bcrypt": "^6.0.0",
+    "cookie": "^2.0.1",
+    "cors": "^2.8.5",
+    "exceljs": "^4.4.0",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.1",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.23.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.3.1",
+    "swagger-ui-express": "^5.0.1",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@tailwindcss/vite": "^4.3.2",
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.6.5",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.3",
+    "@types/swagger-ui-express": "^4.1.8",
+    "@vitejs/plugin-react": "^6.1.2",
+    "concurrently": "^10.0.6",
+    "oxlint": "^1.89.0",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^4.3.2",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.2",
+    "vitest": "^5.0.5"
+  },
+  "description": "A self-hosted, open-source CRM for small sales teams—pipeline, contacts, follow-ups, activity tracking, lead imports, and optional call recordings.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ConvoBrains/zero-cost-crm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ConvoBrains/zero-cost-crm/issues"
+  },
+  "homepage": "https://github.com/ConvoBrains/zero-cost-crm#readme",
+  "engines": {
+    "node": ">=22"
+  }
+}
